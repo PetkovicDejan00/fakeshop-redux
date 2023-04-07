@@ -1,0 +1,257 @@
+* {
+  font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding-inline: 20px;
+}
+
+.error,
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header {
+  border-bottom: 1px solid lightgray;
+  box-shadow: 2px 1px 4px lightgray;
+  padding-block: 1rem;
+}
+
+.header .container a {
+  font-size: 22px;
+  color: black;
+}
+
+.product-listing {
+  margin-block: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+.card {
+  padding: 1rem;
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.25s ease;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px rgb(233, 225, 225);
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 1px 1px 4px rgb(150, 140, 140);
+}
+
+.card-img {
+  padding-block: 1rem;
+  border-bottom: 1px solid lightgray;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-img img {
+  max-width: 100%;
+  width: auto;
+  height: 100%;
+}
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: auto;
+}
+.title {
+  height: 48px;
+  overflow: hidden;
+  margin-block: 5px;
+  line-height: 22px;
+  font-size: 17px;
+  font-weight: 600;
+  color: rgb(38, 38, 38);
+}
+.price {
+  font-weight: 600;
+  background: rgb(221, 221, 221);
+  padding: 4px 10px;
+  width: 70px;
+  text-align: center;
+  border-radius: 4px;
+}
+.category {
+  margin-top: 5px;
+  color: gray;
+  font-size: 14px;
+}
+
+
+
+
+
+
+.single-product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid lightgray;
+  margin-block: 2rem;
+}
+.sp-img {
+  padding: 2rem;
+  width: 40%;
+}
+.sp-img img {
+  width: 100%;
+}
+.sp-info {
+  padding: 2rem;
+  width: 50%;
+}
+.sp-title {
+  color: #333;
+  font-size: 32px;
+  margin-bottom: 1.5rem;
+}
+.sp-price {
+  font-size: 20px;
+  color: #fff;
+  background: rgb(30, 183, 170);
+  width: 120px;
+  padding: 0.5rem;
+  text-align: center;
+  position: relative;
+  pointer-events: none;
+}
+
+.sp-price .dot1,
+.sp-price .dot2 {
+  width: 10px;
+  height: 10px;
+  background: white;
+  position: absolute;
+  border-radius: 50%;
+  top: 37%;
+}
+.dot1 {
+  left: 10px;
+}
+.dot2 {
+  right: 10px;
+}
+.price_rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.rating {
+  background: rgb(178, 183, 30);
+  margin-left: 1rem;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  padding:0.35rem 2rem;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.sp-category {
+  color: brown;
+  font-weight: 600;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: rgb(240, 240, 240);
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.sp-desc {
+  font-size: 18px;
+  margin-top: 1rem;
+  line-height: 24px;
+  color: #777;
+}
+
+.sp-btn {
+  background: #ff3e6c;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 2rem;
+  padding: 0.7rem 3rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.sp-btn:hover {
+  transform: scale(1.1);
+  content: 'asd';
+}
+
+
+@media(max-width: 1024px) {
+  .product-listing {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .price_rating {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rating {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    padding-inline: 0.5rem;
+  }
+}
+
+@media(max-width: 767px) {
+  .product-listing {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .single-product {
+    flex-direction: column;
+  }
+  .sp-info {
+    width: 90%;
+  }
+}
+
+@media(max-width: 500px) {
+  .product-listing {
+    grid-template-columns: 1fr;
+  }
+  .single-product {
+    text-align: center;
+  }
+  .sp-title {
+    font-size: 28px;
+  }
+  .sp-price,
+  .rating {
+    font-size: 16px;
+    margin: 5px auto;
+  }
+  .sp-category {
+    padding-block: 0.4rem;
+  }
+  .sp-desc {
+    font-size: 16px;
+  }
+  .sp-btn {
+    font-size: 14px;
+  }
+}
