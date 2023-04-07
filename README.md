@@ -1,4 +1,4 @@
-# Redux FakeStore website
+# Redux FakeShop website
 
 Simple React website created mainly through practicing React Redux, with a little bit use of React Router as well as Axios.
 
