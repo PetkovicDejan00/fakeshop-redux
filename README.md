@@ -16,4 +16,4 @@ Once the setup is complete, run the project
   npm run dev
 ```
 
-[Website Live Version](https://fakestore-redux.netlify.app)
+[Website Live Version](https://fakeshop-project.netlify.app)
