@@ -414,8 +414,8 @@ a {
   border: none;
   border-radius: 5px;
   text-align: center;
-  caret-color: rgb(30, 183, 170);
   width: 180px;
+  padding-block: 5px;
 }
 
 .sp-btn {
