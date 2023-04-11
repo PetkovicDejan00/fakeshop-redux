@@ -51,7 +51,6 @@ const ProductDetails = () => {
   for (let i = 1; i <= 30; i++) {
     optionsValues.push(i)
   }
-  console.log(optionsValues)
 
   const ratingStyles = (rating) => {
     if (rating > 0 && rating < 1) {
