@@ -8,7 +8,6 @@ import { nanoid } from 'nanoid'
 import LoadingCircle from '../components/LoadingCircle'
 
 const ProductDetails = () => {
-  const [infoShown, setInfoShown] = useState(false)
   const [productError, setProductError] = useState('')
   const [productQty, setProductQty] = useState(1)
   const product = useSelector(state => state.product)
@@ -47,6 +46,12 @@ const ProductDetails = () => {
   if (productError) {
     return <h2 className="error">{productError}</h2>
   }
+
+  let optionsValues = []
+  for (let i = 1; i <= 30; i++) {
+    optionsValues.push(i)
+  }
+  console.log(optionsValues)
 
   const ratingStyles = (rating) => {
     if (rating > 0 && rating < 1) {
@@ -96,25 +101,16 @@ const ProductDetails = () => {
                 <form className="add-to-cart-form">
                   <div className="qty-input">
                     <label>Quantity:</label>
-                    <input
-                      name="qty-input"
-                      type="number" 
-                      min={1}
-                      max={30}
-                      onKeyDown={(e) => e.preventDefault()}
+                    <select
+                      className="select-qty"
                       value={productQty}
                       onChange={(e) => setProductQty(Number(e.target.value))}
-                    />
+                    >
+                      {optionsValues.map((value) => <option key={value} value={value}>{value}</option>)}
+                    </select>
                   </div>
                   <button onClick={addToCart} className="sp-btn">Add to cart</button>
                 </form>
-                <p onClick={() => setInfoShown(prevInfo => !prevInfo)} className="show-info-btn">{`${infoShown ? 'Hide': 'Show'}`} info</p>
-                {infoShown && 
-                  <div className="info-msgs" data-aos="fade-up" data-aos-easing="ease-out-cubic">
-                    <p className="info-msg">* <strong>Minimum</strong> number of products you can add to cart at once is <strong>1</strong>, while <strong>maximum</strong> is <strong>30</strong>.</p>
-                    <p className="info-msg">* Use <strong>up/down arrows</strong> to select wanted number of products.</p>
-                  </div>
-                }
           </div>
         </div>
         }

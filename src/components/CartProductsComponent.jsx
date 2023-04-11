@@ -4,6 +4,7 @@ import removeIcon from '../assets/icons/remove-icon.png'
 import { useDispatch } from 'react-redux'
 import { removeProductFromCart } from '../redux/actions/productActions'
 import { useSelector } from 'react-redux'
+import { successPopup } from './Popup'
 
 const CartProductsComponent = () => {
     const cartProducts = useSelector(state => state.cart.cartProducts)

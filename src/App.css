@@ -48,7 +48,7 @@ a {
 .header .container a {
   color: #333;
   font-family: Impact, 'Arial Narrow Bold', sans-serif;
-  font-size: 32px;
+  font-size: 26px;
   text-decoration:underline;
 }
 
@@ -106,7 +106,7 @@ a {
   flex-direction: row;
   justify-content: space-between;
   max-width: 1000px;
-  padding: 2rem;
+  padding: 1rem 2rem;
   margin: 2rem auto 0;
   align-items: center;
   gap: 2rem;
@@ -121,7 +121,7 @@ a {
 }
 
 .cart-element-image img {
-  height: 240px;
+  height: 150px;
   max-width: 300px;
   width: auto;
   margin: 0 auto;
@@ -202,7 +202,7 @@ a {
 /* FILTERS FILTERS FILTERS FILTERS FILTERS FILTERS FILTERS FILTERS  */
 
 .filters-container {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 .filter-toggle {
   font-weight: 600;
@@ -396,8 +396,8 @@ a {
 }
 .add-to-cart-form {
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 1rem;
   margin-block: 1rem 0.5rem;
 }
@@ -406,8 +406,7 @@ a {
   flex-direction: column;
   gap: 0.5rem;
 }
-.qty-input input {
-  padding: 0.7rem 1rem;
+.qty-input .select-qty {
   font-size: 18px;
   width: 100px;
   background: rgb(30, 183, 170);
@@ -416,30 +415,24 @@ a {
   border-radius: 5px;
   text-align: center;
   caret-color: rgb(30, 183, 170);
+  width: 180px;
 }
+
 .sp-btn {
   background: rgb(30, 183, 170);
   color: #fff;
   font-size: 18px;
   border: none;
   border-radius: 5px;
-  margin-top: 2rem;
-  padding: 0.7rem 3rem;
+  padding-block: 0.7rem;
   cursor: pointer;
   transition: 0.3s ease;
+  width: 180px;
 }
 .sp-btn:hover {
   background: rgb(22, 136, 127);
   box-shadow: 0px 15px 10px -15px rgb(22, 136, 127);
-}
-.show-info-btn {
-  cursor: pointer;
-  margin-bottom: 1rem;
-  text-decoration: underline;
-
-}
-.info-msg {
-  font-size: 14px;
+  transform: translateY(-5px);
 }
 
 /* LOADING CIRCLE LOADING CIRCLE LOADING CIRCLE LOADING CIRCLE  */

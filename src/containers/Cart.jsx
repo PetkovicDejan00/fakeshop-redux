@@ -37,9 +37,8 @@ const Cart = () => {
         }
         
         return alert(`
-            Since this is only Front-end demo version of an 
-            e-Commerce website, checkout is not included. 
-            However, I've got something for You. Your bill is $${totalPrice}.`
+        Since this is only Front-end demo version of an e-Commerce website, checkout is not included. 
+        However, I've got something for You. Your bill is $${totalPrice.toFixed(2)}.`
         )
     }  
 
