@@ -1,11 +1,18 @@
 import { actionTypes } from "../constants/actionTypes";
 
-const initialState = []
+const initialState = {
+    filtering: false
+}
 
 export const productsReducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.SET_PRODUCTS:
             return {...state, products: action.payload}
+        case actionTypes.FILTER_PRODUCTS:
+            let filteredProducts = state.products.filter(product => product.category === action.payload)
+            return {...state, filteredProducts: [...filteredProducts], filterCategory: action.payload}
+        case actionTypes.CLEAR_FILTERS:
+            return {...state, filteredProducts: [], filterCategory: ''}
         default:
             return state
     }

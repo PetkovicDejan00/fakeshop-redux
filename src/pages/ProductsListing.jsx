@@ -2,10 +2,14 @@ import React, {useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { setProducts } from '../redux/actions/productActions'
 import axios from 'axios'
-import ProductComponent from './ProductComponent'
+import ProductComponent from '../components/ProductsComponent'
+import FilterProducts from '../containers/FilterProducts'
+import { useSelector } from 'react-redux'
 
 const ProductsListing = () => {
     const [productsError, setProductsError] = useState('')
+    const cartShown = useSelector(state => state.cart.cartShown)
+
     const dispatch = useDispatch()
 
     const fetchAllProducts = async () => {
@@ -25,9 +29,16 @@ const ProductsListing = () => {
     }
 
   return (
-    <div className="product-listing container">
-        <ProductComponent />
-    </div>
+    <>
+        {cartShown === false &&
+            <div className="container products-container">
+                <FilterProducts />
+                <div className="product-listing">
+                    <ProductComponent />
+                </div>
+            </div>
+        }
+    </>
   )
 }
 
