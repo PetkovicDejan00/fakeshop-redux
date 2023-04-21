@@ -56,3 +56,14 @@ export const clearFilters = () => {
         type: actionTypes.CLEAR_FILTERS
     }
 }
+export const logIn = () => {
+    return {
+        type: actionTypes.LOG_IN,
+    }
+}
+export const logOut = () => {
+    return {
+        type: actionTypes.LOG_OUT,
+    }
+}
+

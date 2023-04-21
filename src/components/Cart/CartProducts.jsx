@@ -1,12 +1,12 @@
 import React from 'react'
 import { nanoid } from 'nanoid'
-import removeIcon from '../assets/icons/remove-icon.png'
+import removeIcon from '../../assets/icons/remove-icon.png'
 import { useDispatch } from 'react-redux'
-import { removeProductFromCart } from '../redux/actions/productActions'
+import { removeProductFromCart } from '../../redux/actions/productActions'
 import { useSelector } from 'react-redux'
-import { successPopup } from './Popup'
+import { successPopup } from '../Popup'
 
-const CartProductsComponent = () => {
+const CartProducts = () => {
     const cartProducts = useSelector(state => state.cart.cartProducts)
     const dispatch = useDispatch()
 
@@ -16,27 +16,28 @@ const CartProductsComponent = () => {
     }
 
     return (
-        cartProducts?.map((product) => {
-        const {id, title, price, category, image, productQty: qty} = product
+        cartProducts.map((product) => {
         return (
             <div className="cart-element" key={nanoid()} data-aos="flip-up">
                 <div className="cart-element-image">
-                    <img src={image} alt={title} />
+                    <img src={product.image} alt={product.title} />
                 </div>
                 <div className="cart-element-info">
-                    <p>{category}</p>
-                    <h3 className="cart-el-title">{title}</h3>
-                    <p className="cart-el-price">{qty} X ${price} = ${(qty*price).toFixed(2)}</p>
+                    <p className="cart-el-category">{product.category}</p>
+                    <h3 className="cart-el-title">{product.title}</h3>
+                    <p className="cart-el-price">
+                        {product.productQty} X ${product.price} = ${(product.productQty*product.price).toFixed(2)}
+                    </p>
                 </div>
                 <img 
                     className="remove-button" 
                     src={removeIcon}
                     title="Remove product from cart"
-                    onClick={() => handleRemoveProductFromCart(id)}
+                    onClick={() => handleRemoveProductFromCart(product.id)}
                 />
             </div>
         )
     }))
 }
 
-export default CartProductsComponent
+export default CartProducts

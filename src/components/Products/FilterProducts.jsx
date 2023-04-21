@@ -1,18 +1,18 @@
 import React, {useState} from 'react'
-import { clearFilters, filterProducts } from '../redux/actions/productActions'
+import { clearFilters, filterProducts } from '../../redux/actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
+
+const categories = [
+    "jewelery",
+    "men's clothing",
+    "electronics",
+    "women's clothing",
+]
 
 const FilterProducts = () => {
     const dispatch = useDispatch()
     const [filtersShown, setFiltersShown] = useState(false)
     const filterCategory = useSelector((state) => state.allProducts.filterCategory)
-
-    const categories = [
-        "jewelery",
-        "men's clothing",
-        "electronics",
-        "women's clothing",
-    ]
 
     const handleFilter = (category) => {
         dispatch(filterProducts(category))
@@ -38,16 +38,16 @@ const FilterProducts = () => {
                             className={`filter-btn ${filterCategory === category && 'active'}`}>
                                 {category}
                         </button>
-                        )
-                    })}
-        {filterCategory && 
-            <a 
-            className="clear-filters"
-            onClick={handleClearFilters}>
-                clear filters
-            </a>
-        }
-        </div>
+                    )
+                })}
+            {filterCategory && 
+                <a 
+                className="clear-filters"
+                onClick={handleClearFilters}>
+                    clear filters
+                </a>
+            }
+            </div>
         }
     </div>
   )

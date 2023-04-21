@@ -3,16 +3,19 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { activeProduct, addProductToCart, removeActiveProduct } from '../redux/actions/productActions'
-import { successPopup } from '../components/Popup'
+import { successPopup, errorPopup } from '../components/Popup'
 import { nanoid } from 'nanoid'
 import LoadingCircle from '../components/LoadingCircle'
+import { useNavigate } from 'react-router-dom'
 
 const ProductDetails = () => {
   const [productError, setProductError] = useState('')
   const [productQty, setProductQty] = useState(1)
   const product = useSelector(state => state.product)
   const cartShown = useSelector(state => state.cart.cartShown)
+  const loggedIn = useSelector(state => state.user.loggedIn)
   const {productId} = useParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const {category, price, title, description, rating, image} = product
 
@@ -26,14 +29,21 @@ const ProductDetails = () => {
 
   const addToCart = (e) => {
     e.preventDefault()
-    dispatch(addProductToCart({
-      ...product, 
-      productQty, 
-      id: nanoid(),
-      productTotalPrice: product.price * productQty,
-    }))
-    successPopup('Product added to cart')
-    setProductQty(1)
+
+    if (loggedIn) {
+      dispatch(addProductToCart({
+        ...product, 
+        productQty, 
+        id: nanoid(),
+        productTotalPrice: product.price * productQty,
+      }))
+      successPopup('Product added to cart')
+      setProductQty(1)
+
+    } else {
+      navigate('/login')
+      errorPopup('You must log in first.')
+    }
   }
 
   useEffect(() => {
@@ -55,13 +65,13 @@ const ProductDetails = () => {
   const ratingStyles = (rating) => {
     if (rating > 0 && rating < 1) {
       return {background: '#ff4545'}
-    } else if (rating > 1 && rating < 2) {
+    } else if (rating >= 1 && rating < 2) {
       return {background: '#ffa534'}
-    } else if (rating > 2 && rating < 3) {
+    } else if (rating >= 2 && rating < 3) {
       return {background: '#ffe234', color: '#000'}
-    } else if (rating > 3 && rating < 4) {
-      return {background: '#b7dd29'}
-    } else if (rating > 4 && rating < 5) {
+    } else if (rating >= 3 && rating < 4) {
+      return {background: '#b7dd29', color: '#000'}
+    } else if (rating >= 4 && rating < 5) {
       return {background: '#57e32c'}
     }
   }

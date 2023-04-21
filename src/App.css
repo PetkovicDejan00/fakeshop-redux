@@ -1,8 +1,11 @@
 /* GLOBAL CSS GLOBAL CSS GLOBAL CSS GLOBAL CSS GLOBAL CSS*/
-* {
+#root {
   font-family: "Roboto", sans-serif;
   padding: 0;
   margin: 0;
+
+  --primary-color: rgb(55,65,81);
+  --secondary-color: rgb(30, 183, 170);
 }
 a {
   color: black;
@@ -26,11 +29,12 @@ a {
   padding-block: 80px 20px;
 }
 
+
 /* HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER */
 
 .header {
   border-bottom: 1px solid lightgray;
-  box-shadow: 2px 1px 4px lightgray;
+  box-shadow: 2px 1px 4px rgba(53, 63, 81, 0.253);
   padding-block: 1rem;
   z-index: 999;
   position: fixed;
@@ -45,31 +49,44 @@ a {
   justify-content: space-between;
   align-items: center;
 }
-.header .container a {
-  color: #333;
-  font-family: Impact, 'Arial Narrow Bold', sans-serif;
-  font-size: 26px;
-  text-decoration:underline;
+.header .container .nav-logo {
+  width: 120px;
+  display: flex;
+  align-items: center;
+} 
+.nav-logo img {
+  width: 100%;
+}
+.header-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+.header-links a {
+  font-weight: 600;
+  transition: 0.3s ease;
+  color: var(--primary-color);
+}
+.header-links a:hover {
+  text-decoration: underline;
 }
 
 /* CART CART CART CART CART CART CART CART CART CART CART CART  */
 
 .cart-frame {
   position: relative;
-  width: 28px;
+  width: 22px;
   cursor: pointer;
   transition: 0.3s ease;
-}
-.cart-frame:hover {
-  transform: scale(1.1);
 }
 .cart-icon-img {
   width: 100%;
 }
 .cart-icon-items {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: -5px;
+  bottom: -2px;
   background-color: #ba2d4e;
   width: 15px;
   height: 15px;
@@ -113,6 +130,8 @@ a {
   height: 240px;
   background: #fff;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+
 }
 .cart-element-image {
   width: 300px;
@@ -187,11 +206,16 @@ a {
 .empty-cart-message button {
   margin: 0 auto;
 }
+.cart-el-category {
+  color:gray;
+}
 .cart-el-title {
   margin-block: 1rem;
+  color: var(--primary-color);
 }
 .cart-el-price {
   font-weight: 600;
+  color: var(--primary-color);
 }
 .remove-button {
   max-height: 48px;
@@ -207,11 +231,13 @@ a {
 .filter-toggle {
   font-weight: 600;
   text-decoration: underline;
+  font-size: 16px;
+  width: 130px;
   margin: 0 auto;
   cursor: pointer;
   text-transform: uppercase;
-  width: 140px;
   text-align: center;
+  color: var(--primary-color);
 }
 .filter-btns {
   display: flex;
@@ -231,11 +257,11 @@ a {
   transition: 0.3s ease;
 }
 .filter-btns .filter-btn:hover {
-  background: brown;
+  background: var(--primary-color);
   color: #fff;
 }
 .filter-btns .active {
-  background: brown;
+  background: var(--primary-color);
   color: #fff;
 }
 .clear-filters {
@@ -254,18 +280,17 @@ a {
 }
 .card {
   padding: 1rem;
-  border: 1px solid lightgray;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
   transition: 0.25s ease;
   border-radius: 15px;
-  box-shadow: 1px 1px 4px rgb(240, 236, 236);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 1px 1px 4px rgb(150, 140, 140);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 20px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .card-img {
@@ -294,7 +319,7 @@ a {
   line-height: 22px;
   font-size: 17px;
   font-weight: 600;
-  color: rgb(38, 38, 38);
+  color: var(--primary-color);
 }
 
 .price {
@@ -304,6 +329,7 @@ a {
   width: 70px;
   text-align: center;
   border-radius: 4px;
+  color: var(--primary-color);
 }
 .category {
   margin-top: 5px;
@@ -331,7 +357,7 @@ a {
   width: 50%;
 }
 .sp-title {
-  color: #333;
+  color: var(--primary-color);
   font-size: 32px;
   margin-bottom: 1.5rem;
 }
@@ -367,7 +393,6 @@ a {
   align-items: center;
 }
 .rating {
-  background: rgb(178, 183, 30);
   margin-left: 1rem;
   text-align: center;
   align-items: center;
@@ -379,7 +404,7 @@ a {
 }
 
 .sp-category {
-  color: brown;
+  color:  var(--primary-color);
   font-weight: 600;
   padding: 1rem;
   margin-top: 1rem;
@@ -409,7 +434,7 @@ a {
 .qty-input .select-qty {
   font-size: 18px;
   width: 100px;
-  background: rgb(30, 183, 170);
+  background:  var(--secondary-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -419,7 +444,7 @@ a {
 }
 
 .sp-btn {
-  background: rgb(30, 183, 170);
+  background: var(--secondary-color);
   color: #fff;
   font-size: 18px;
   border: none;
@@ -487,6 +512,72 @@ a {
       opacity: 0;
   }
 }
+
+/* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */  /* LOGIN */
+
+.login-page {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  background: #f4f1f1;
+  width: 100%;
+  height: 100vh;
+  border-radius: 5px;
+}
+.login-page h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #FFF;
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  margin-top: 150px;
+  gap: 1rem;
+  padding: 3rem 2rem;
+  border-radius: 10px;
+  background: var(--primary-color);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
+.button-container input {
+  padding-block: 0.5rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 5px;
+  background: white;
+  font-weight: 600;
+}
+.button-container {
+  margin: 1rem auto 0;
+  width: 200px;
+}
+
+
+.button-container input:hover {
+  box-shadow: inset 0 -32px 0 0 var(--secondary-color);
+  color: #fff;
+}
+
+.input {
+  padding: 0.7rem;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  outline-color: var(--primary-color);
+  text-align: center;
+  color: var(--primary-color);
+
+}
+
+
 
 /* MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES  */
 
@@ -575,6 +666,9 @@ a {
   .empty-cart-message h2 {
     font-size: 32px;
   }
+  .header-links {
+    gap: 1rem;
+  }
 }
 
 @media(max-width: 505px) {
@@ -616,5 +710,20 @@ a {
   }
   .add-to-cart-form .sp-btn {
     margin-top: 0;
+  }
+
+  .login-page form {
+    width: 90%;
+    padding-inline: 0.5rem;
+  }
+  .login-page input {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .button-container {
+    width: 50%;
+  }
+  .button-container input {
+    width: 100%;
   }
 }

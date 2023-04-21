@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { setProducts } from '../redux/actions/productActions'
 import axios from 'axios'
-import ProductComponent from '../components/ProductsComponent'
-import FilterProducts from '../containers/FilterProducts'
+import Products from '../components/Products/Products'
+import FilterProducts from '../components/Products/FilterProducts'
 import { useSelector } from 'react-redux'
 
 const ProductsListing = () => {
@@ -34,7 +34,7 @@ const ProductsListing = () => {
             <div className="container products-container">
                 <FilterProducts />
                 <div className="product-listing">
-                    <ProductComponent />
+                    <Products />
                 </div>
             </div>
         }

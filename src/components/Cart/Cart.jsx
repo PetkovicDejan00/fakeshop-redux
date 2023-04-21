@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { removeAllProductsFromCart, removeCart } from '../redux/actions/productActions'
+import { removeAllProductsFromCart, removeCart } from '../../redux/actions/productActions'
 import { useNavigate } from 'react-router-dom'
-import { successPopup } from '../components/Popup'
-import CartProductsComponent from '../components/CartProductsComponent'
+import { successPopup } from '../Popup'
+import CartProducts from './CartProducts'
 
 const Cart = () => {
     const cartShown = useSelector(state => state.cart.cartShown)
@@ -16,7 +16,6 @@ const Cart = () => {
         localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
     }, [cartProducts])
 
-    
     const handleShowAllProducts = () => {
         dispatch(removeCart())
         navigate('.')
@@ -30,12 +29,10 @@ const Cart = () => {
 
     const calculateTotalPrice = () => {
         let pricesArray = []
-        let totalPrice = 0;
         cartProducts.map((product) => pricesArray.push(product.productTotalPrice))
-        for (let i = 0; i < pricesArray.length; i++) {
-            totalPrice += pricesArray[i]
-        }
-        
+        const totalPrice = pricesArray.reduce(
+            (accumulator, price) => accumulator + price)
+
         return alert(`
         Since this is only Front-end demo version of an e-Commerce website, checkout is not included. 
         However, I've got something for You. Your bill is $${totalPrice.toFixed(2)}.`
@@ -45,30 +42,30 @@ const Cart = () => {
   return (
     <div className='container cart-container'>
         <section className={`shopping-cart ${cartShown ? '' : 'disabled'}`}>
-            <CartProductsComponent />
+            <CartProducts />
             {cartProducts.length > 0 ?
-            <div className="cart-btns">
-                <button 
-                    onClick={() => calculateTotalPrice()}
-                    className="cart-checkout-btn">
-                        Proceed to checkout
-                </button>
-                <button 
-                    className="cart-remove-all-btn"
-                    onClick={() => handleEmptyCart()}>
-                        Remove all products
-                </button>
-            </div>
-            : 
-            <div className="empty-cart-message">
-                <h2>Cart is empty.</h2>
-                <button 
-                    className="check-products-btn"
-                    onClick={handleShowAllProducts}>
-                        Check all products
-                </button>
-            </div>
-            }
+                <div className="cart-btns">
+                    <button 
+                        onClick={() => calculateTotalPrice()}
+                        className="cart-checkout-btn">
+                            Proceed to checkout
+                    </button>
+                    <button 
+                        className="cart-remove-all-btn"
+                        onClick={() => handleEmptyCart()}>
+                            Remove all products
+                    </button>
+                </div>
+                : 
+                <div className="empty-cart-message">
+                    <h2>Cart is empty.</h2>
+                    <button 
+                        className="check-products-btn"
+                        onClick={handleShowAllProducts}>
+                            Check all products
+                    </button>
+                </div>
+                }
         </section>
     </div>
   )
