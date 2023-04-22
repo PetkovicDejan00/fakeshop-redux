@@ -1,41 +1,32 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { activeProduct, addProductToCart, removeActiveProduct } from '../redux/actions/productActions'
+import { addProductToCart } from '../redux/actions/productActions'
 import { successPopup, errorPopup } from '../components/Popup'
 import { nanoid } from 'nanoid'
 import LoadingCircle from '../components/LoadingCircle'
 import { useNavigate } from 'react-router-dom'
+import { useFetchSingleProduct } from '../hooks/useFetchSingleProduct'
 
-const ProductDetails = () => {
-  const [productError, setProductError] = useState('')
+const ProductDetails = ({token}) => {
   const [productQty, setProductQty] = useState(1)
-  const product = useSelector(state => state.product)
   const cartShown = useSelector(state => state.cart.cartShown)
-  const loggedIn = useSelector(state => state.user.loggedIn)
   const {productId} = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {category, price, title, description, rating, image} = product
-
-  const fetchSingleProduct = async () => {
-    const response = await axios
-    .get(`https://fakestoreapi.com/products/${productId}`)
-    .catch(err => setProductError(err.message))
-
-    dispatch(activeProduct(response.data))
-  }
+  
+  const {data, isLoading, error, isError} = useFetchSingleProduct(productId)
+  const productData = data?.data
 
   const addToCart = (e) => {
     e.preventDefault()
 
-    if (loggedIn) {
+    if (token) {
       dispatch(addProductToCart({
-        ...product, 
+        ...productData, 
         productQty, 
         id: nanoid(),
-        productTotalPrice: product.price * productQty,
+        productTotalPrice: productData.price * productQty,
       }))
       successPopup('Product added to cart')
       setProductQty(1)
@@ -46,16 +37,8 @@ const ProductDetails = () => {
     }
   }
 
-  useEffect(() => {
-    productId && fetchSingleProduct()
-    return () => {
-      dispatch(removeActiveProduct())
-    }
-  }, [productId])
-
-  if (productError) {
-    return <h2 className="error">{productError}</h2>
-  }
+  if (isError) return <h2 className="error">{error.message}</h2>
+  if (isLoading) return <LoadingCircle />
 
   let optionsValues = []
   for (let i = 1; i <= 30; i++) {
@@ -80,46 +63,37 @@ const ProductDetails = () => {
     <>
     {cartShown === false &&
       <div className="container details-container">
-      {Object.keys(product).length === 0 
-      ? 
-        <LoadingCircle />
-      : 
+      {productData && 
         <div className="single-product">
-          <div className="sp-img" 
-              data-aos="fade-right"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-sine">
-                <img src={image} alt={title} />
+          <div className="sp-img" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+                <img src={productData.image} alt={productData.title} />
           </div>
-          <div className="sp-info" 
-              data-aos="fade-left"
-              data-aos-offset="300"
-              data-aos-easing="ease-in-sine">
-                <h2 className="sp-title">{title}</h2>
-                <div className="price_rating">
-                  <p className="sp-price">${price} 
-                    <span className="dot1"></span>
-                    <span className="dot2"></span>
-                  </p>
-                  <p className="rating" style={ratingStyles(rating.rate)}>
-                    ★ {rating.rate} out of {rating.count} rates.
-                  </p>
-                </div>
-                <p className="sp-category">{category.toUpperCase()}</p>
-                <p className="sp-desc">{description}</p>
-                <form className="add-to-cart-form">
-                  <div className="qty-input">
-                    <label>Quantity:</label>
-                    <select
-                      className="select-qty"
-                      value={productQty}
-                      onChange={(e) => setProductQty(Number(e.target.value))}
-                    >
-                      {optionsValues.map((value) => <option key={value} value={value}>{value}</option>)}
-                    </select>
-                  </div>
-                  <button onClick={addToCart} className="sp-btn">Add to cart</button>
-                </form>
+          <div className="sp-info" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+            <h2 className="sp-title">{productData.title}</h2>
+            <div className="price_rating">
+              <p className="sp-price">${productData.price} 
+                <span className="dot1"></span>
+                <span className="dot2"></span>
+              </p>
+              <p className="rating" style={ratingStyles(productData.rating.rate)}>
+                ★ {productData.rating.rate} out of {productData.rating.count} rates.
+              </p>
+            </div>
+            <p className="sp-category">{productData.category.toUpperCase()}</p>
+            <p className="sp-desc">{productData.description}</p>
+            <form className="add-to-cart-form">
+              <div className="qty-input">
+                <label>Quantity:</label>
+                <select
+                  className="select-qty"
+                  value={productQty}
+                  onChange={(e) => setProductQty(Number(e.target.value))}
+                >
+                  {optionsValues.map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
+              </div>
+              <button onClick={addToCart} className="sp-btn">Add to cart</button>
+            </form>
           </div>
         </div>
         }

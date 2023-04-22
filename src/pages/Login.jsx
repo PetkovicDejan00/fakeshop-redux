@@ -1,42 +1,35 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { logIn } from '../redux/actions/productActions'
 import { useNavigate } from 'react-router-dom'
 import { errorPopup, successPopup } from '../components/Popup'
+import axios from 'axios'
 
-const database = [
-  {
-    username: "user1",
-    password: "user1_password"
-  },
-  {
-    username: "user2",
-    password: "user2_password"
-  }
-]
-
-const Login = () => {
+const Login = ({setToken}) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isLogging, setIsLogging] = useState(false)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const handleLogin = (e) => {
     e.preventDefault()
-    const userData = database.find((user) => user.username === username)
-    console.log(userData)
+    setIsLogging(true)
 
-    if (userData) {
-      if (userData.password !== password) {
-        errorPopup('Password is invalid.')
-      } else {
-        dispatch(logIn())
-        navigate((-1), {replace: true})
-        successPopup('Logged in successfully.')
+    axios({
+      url: 'https://fakestoreapi.com/auth/login',
+      method: "POST",
+      data: {
+        username: username,
+        password: password
       }
-    } else {
-      errorPopup('Username is invalid.')
-    }
+    }).then(res => {
+      setToken(res.data.token)
+      localStorage.setItem('authToken', res.data.token)
+      successPopup('Logged in successfully.')
+      navigate((-1), {replace: true})
+      setIsLogging(false)
+    }).catch(err => {
+      errorPopup(err.response.data)
+      setIsLogging(false)
+    })
   }
 
   return (
@@ -58,7 +51,12 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required />
         <div className="button-container">
-          <input type="submit" />
+          <input 
+            type="submit" 
+            value={isLogging ? 'Logging in...' : 'Submit'}
+            disabled={isLogging}
+            style={isLogging ? {pointerEvents: 'none'} : null}>
+          </input>
         </div>
      </form>
    </section>

@@ -1,8 +1,6 @@
 import './App.css'
-import Header from './components/Header'
 import ProductsListing from './pages/ProductsListing'
 import ProductDetails from './pages/ProductDetails'
-import Cart from './components/Cart/Cart'
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,11 +10,22 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Login from './pages/Login'
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
+import FilteredProducts from './components/Filter/FilteredProducts'
+import Layout from './components/Layouts/Layout'
+import ProductsLayout from './components/Layouts/ProductsLayout';
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem('authToken') || null)
+
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false, retry: 0 }}
+  })
 
   useEffect(() => {
     AOS.init();
@@ -24,16 +33,24 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Header />
-        <Cart />
-        <Routes>
-          <Route path="/" exact element={<ProductsListing />} />
-          <Route path="/product/:productId" element={<ProductDetails />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Router>
-      <ToastContainer />
+      <Provider store={store}>
+        <Router>
+          <QueryClientProvider client={queryClient}>
+            <Routes>
+              <Route path="/" element={<Layout token={token} setToken={setToken}/>}>
+                <Route element={<ProductsLayout />}>
+                  <Route index element={<ProductsListing />} />
+                  <Route path="/category/:category" element={<FilteredProducts />} />
+                </Route>
+                <Route path="/product/:productId" element={<ProductDetails token={token} />} />
+                <Route path="/login" element={<Login setToken={setToken} />} />
+              </Route>
+            </Routes>
+            <ReactQueryDevtools initialIsOpen={false}/>
+          </QueryClientProvider>
+        </Router>
+        <ToastContainer />
+      </Provider>
     </div>
   )
 }

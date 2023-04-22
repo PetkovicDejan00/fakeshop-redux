@@ -1,41 +1,41 @@
-import React, {useEffect, useState} from 'react'
-import { useDispatch } from 'react-redux'
-import { setProducts } from '../redux/actions/productActions'
-import axios from 'axios'
-import Products from '../components/Products/Products'
-import FilterProducts from '../components/Products/FilterProducts'
+import React from 'react'
+import Filter from '../components/Filter/FilteredProducts'
 import { useSelector } from 'react-redux'
+import { useFetchAllProducts } from '../hooks/useFetchAllProducts'
+import { Link } from 'react-router-dom'
+import LoadingCircle from '../components/LoadingCircle'
 
 const ProductsListing = () => {
-    const [productsError, setProductsError] = useState('')
     const cartShown = useSelector(state => state.cart.cartShown)
 
-    const dispatch = useDispatch()
+    const {data: products, isError, error, isLoading} = useFetchAllProducts()
 
-    const fetchAllProducts = async () => {
-        const response = await axios
-        .get('https://fakestoreapi.com/products')
-        .catch(err => setProductsError(err.message))
-
-        dispatch(setProducts(response.data))
-    }
-
-    useEffect(() => {
-        fetchAllProducts()
-    }, [])
-
-    if (productsError) {
-        return <h2 className="error">{productsError}</h2>
-    }
+    if (isError) return <h2 className="error">{error.message}</h2>
+    if (isLoading) return <LoadingCircle />
 
   return (
     <>
         {cartShown === false &&
             <div className="container products-container">
-                <FilterProducts />
                 <div className="product-listing">
-                    <Products />
+                    {products && products.data.map((product) => {
+                        return (
+                            <article key={product.id} className="card">
+                                <Link to={`/product/${product.id}`} data-aos="zoom-in">
+                                    <div className="card-img">
+                                        <img src={product.image} alt={product.title} />
+                                    </div>
+                                    <div className="card-info">
+                                        <h4 className="title">{product.title}</h4>
+                                        <p className="price">${product.price}</p>
+                                        <p className="category">{product.category}</p>
+                                    </div>
+                                </Link>
+                            </article>
+                        )
+                    })}
                 </div>
+                <Filter />
             </div>
         }
     </>
