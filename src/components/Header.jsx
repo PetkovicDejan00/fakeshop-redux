@@ -16,7 +16,7 @@ const Header = ({token, setToken}) => {
   }
 
   const toggleCart = () => {
-    if (cartState.cartShown === true) {
+    if (cartState.cartShown) {
        handleCartRemoval()
     } else {
       dispatch(showCart())

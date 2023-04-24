@@ -1,9 +1,14 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
+const getProducts = () => {
+    return axios.get(`https://fakestoreapi.com/products/`)
+}
+
 export const useFetchAllProducts = () => {
-    const getProducts = () => {
-        return axios.get(`https://fakestoreapi.com/products/`)
-    }
-    return useQuery(['all-products'], getProducts)
+    
+    return useQuery({
+        queryKey: ['products'],
+        queryFn: getProducts,
+    })
 }

@@ -28,10 +28,9 @@ const Cart = () => {
     }
 
     const calculateTotalPrice = () => {
-        let pricesArray = []
-        cartProducts.map((product) => pricesArray.push(product.productTotalPrice))
-        const totalPrice = pricesArray.reduce(
-            (accumulator, price) => accumulator + price)
+        const totalPrice = cartProducts.reduce((total, currentVal) => {
+            return total + currentVal.price;
+        }, 0)
 
         return alert(`
         Since this is only Front-end demo version of an e-Commerce website, checkout is not included. 
