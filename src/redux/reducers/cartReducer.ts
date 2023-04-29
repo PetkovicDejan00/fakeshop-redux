@@ -15,7 +15,6 @@ export const cartReducer = (state = initialState, action:IAction) => {
         case actionTypes.REMOVE_CART:
             return {...state, cartShown: false}
         case actionTypes.ADD_PRODUCT_TO_CART:
-            console.log(action.payload)
             return {...state, cartProducts: [...state.cartProducts, action.payload]}
         case actionTypes.REMOVE_PRODUCT_FROM_CART:
             const filteredProducts = state.cartProducts.filter((product:IProduct) => product.id !== action.payloadID)
