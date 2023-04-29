@@ -1,4 +1,5 @@
 import { actionTypes } from "../constants/actionTypes";
+import { IProduct } from "../../common/types";
 
 export const showCart = () => {
     return {
@@ -10,22 +11,21 @@ export const removeCart = () => {
         type: actionTypes.REMOVE_CART
     }
 }
-export const addProductToCart = (product) => {
+export const addProductToCart = (product: IProduct) => {
     return {
         type: actionTypes.ADD_PRODUCT_TO_CART,
         payload: product
     }
 }
-export const removeAllProductsFromCart = (product) => {
+export const removeAllProductsFromCart = () => {
     return {
         type: actionTypes.REMOVE_ALL_PRODUCTS_FROM_CART,
-        payload: product
     }
 }
-export const removeProductFromCart = (product) => {
+export const removeProductFromCart = (id: string) => {
     return {
         type: actionTypes.REMOVE_PRODUCT_FROM_CART,
-        payload: product
+        payloadID: id
     }
 }
 

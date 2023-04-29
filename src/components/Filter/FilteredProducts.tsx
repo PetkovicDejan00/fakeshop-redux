@@ -1,16 +1,19 @@
-import React from 'react'
 import { useFilterByCategory } from '../../hooks/useFilterByCategory'
 import { Link, useParams } from 'react-router-dom'
 import LoadingCircle from '../LoadingCircle'
 import { useSelector } from 'react-redux'
+import { IProduct } from '../../common/types'
+import { IRootState } from '../../redux/store'
 
 const FilteredProducts = () => {
   const {category} = useParams()
-  const cartShown = useSelector(state => state.cart.cartShown)
+  const cartShown = useSelector((state: IRootState) => state.cart.cartShown)
 
-  const {data: products, isFetching, error, isError} = useFilterByCategory(category)
+  const {data: products, isFetching, error} = useFilterByCategory(category)
 
-  if (isError) return <h2 className="error">{error.message}</h2>
+  if (error instanceof Error) {
+    return <h2 className="error">{error.message}</h2>
+  }
   if (isFetching) return <LoadingCircle />
 
   return (
@@ -18,7 +21,7 @@ const FilteredProducts = () => {
       {cartShown === false &&
         <div className="container products-container">
         <div className="product-listing">
-          {products && products.data.map((product) => {
+          {products && products.data.map((product: IProduct) => {
             return (
               <article key={product.id} className="card">
                 <Link to={`/product/${product.id}`} data-aos="zoom-in">

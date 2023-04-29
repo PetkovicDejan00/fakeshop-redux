@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { removeAllProductsFromCart, removeCart } from '../../redux/actions/productActions'
 import { useNavigate } from 'react-router-dom'
 import { successPopup } from '../Popup'
 import CartProducts from './CartProducts'
+import { IProduct } from '../../common/types'
+import { IRootState } from '../../redux/store'
 
 const Cart = () => {
-    const cartShown = useSelector(state => state.cart.cartShown)
-    const cartProducts = useSelector(state => state.cart.cartProducts)
+    const cartShown: boolean = useSelector((state: IRootState) => state.cart.cartShown)
+    const cartProducts: IProduct[] = useSelector((state: IRootState) => state.cart.cartProducts)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 

@@ -7,18 +7,23 @@ import { nanoid } from 'nanoid'
 import LoadingCircle from '../components/LoadingCircle'
 import { useNavigate } from 'react-router-dom'
 import { useFetchSingleProduct } from '../hooks/useFetchSingleProduct'
+import { IRootState } from '../redux/store'
 
-const ProductDetails = ({token}) => {
+interface Prop {
+  token: string | null
+}
+
+const ProductDetails = ({token}:Prop) => {
   const [productQty, setProductQty] = useState(1)
-  const cartShown = useSelector(state => state.cart.cartShown)
+  const cartShown = useSelector((state: IRootState) => state.cart.cartShown)
   const {productId} = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   
-  const {data, isLoading, error, isError} = useFetchSingleProduct(productId)
+  const {data, isLoading, error} = useFetchSingleProduct(productId)
   const productData = data?.data
 
-  const addToCart = (e) => {
+  const addToCart = (e: React.FormEvent) => {
     e.preventDefault()
 
     if (token) {
@@ -37,7 +42,9 @@ const ProductDetails = ({token}) => {
     }
   }
 
-  if (isError) return <h2 className="error">{error.message}</h2>
+  if (error instanceof Error) {
+    return <h2 className="error">{error.message}</h2>
+  }  
   if (isLoading) return <LoadingCircle />
 
   let optionsValues = []
@@ -45,7 +52,7 @@ const ProductDetails = ({token}) => {
     optionsValues.push(i)
   }
 
-  const ratingStyles = (rating) => {
+  const ratingStyles = (rating: number) => {
     if (rating > 0 && rating < 1) {
       return {background: '#ff4545'}
     } else if (rating >= 1 && rating < 2) {

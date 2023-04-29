@@ -1,13 +1,14 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import cart from '../assets/icons/cart.png'
+import logo from '../assets/icons/logo.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeCart, showCart } from '../redux/actions/productActions'
 import { successPopup } from './Popup'
-import logo from '../assets/icons/logo.png'
+import { ITokenProps } from '../common/types'
+import { IRootState } from '../redux/store'
 
-const Header = ({token, setToken}) => {
-  const cartState = useSelector(state => state.cart)
+const Header = ({token, setToken}:ITokenProps) => {
+  const cartState = useSelector((state: IRootState) => state.cart)
   const dispatch = useDispatch()
 
   const handleCartRemoval = () => {

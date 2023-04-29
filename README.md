@@ -1,6 +1,6 @@
 # Shopnetic
 
-React E-Commerce responsive website created using react query, redux, router, axios, react-toastify & aos packages.
+React E-Commerce responsive website created using typescript, react query, redux, router, axios, react-toastify & aos packages.
 
 Available options:
 - Filtering all existing products with 4 categories & clearing the filter option.

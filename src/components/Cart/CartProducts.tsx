@@ -1,22 +1,23 @@
-import React from 'react'
 import { nanoid } from 'nanoid'
 import removeIcon from '../../assets/icons/remove-icon.png'
 import { useDispatch } from 'react-redux'
 import { removeProductFromCart } from '../../redux/actions/productActions'
 import { useSelector } from 'react-redux'
 import { successPopup } from '../Popup'
+import { IProduct } from '../../common/types'
+import { IRootState } from '../../redux/store'
 
 const CartProducts = () => {
-    const cartProducts = useSelector(state => state.cart.cartProducts)
+    const cartProducts = useSelector((state: IRootState) => state.cart.cartProducts)
     const dispatch = useDispatch()
 
-    const handleRemoveProductFromCart = (id) => {
+    const handleRemoveProductFromCart = (id: string) => {
         dispatch(removeProductFromCart(id))
         successPopup('Product removed from cart.')
     }
 
     return (
-        cartProducts.map((product) => {
+        cartProducts.map((product: IProduct) => {
         return (
             <div className="cart-element" key={nanoid()} data-aos="flip-up">
                 <div className="cart-element-image">

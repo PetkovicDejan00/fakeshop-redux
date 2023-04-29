@@ -3,13 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import { errorPopup, successPopup } from '../components/Popup'
 import axios from 'axios'
 
-const Login = ({setToken}) => {
+interface Prop {
+  setToken: React.Dispatch<React.SetStateAction<string | null>>
+}
+
+const Login = ({setToken}: Prop) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isLogging, setIsLogging] = useState(false)
   const navigate = useNavigate()
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     setIsLogging(true)
 
@@ -24,7 +28,7 @@ const Login = ({setToken}) => {
       setToken(res.data.token)
       localStorage.setItem('authToken', res.data.token)
       successPopup('Logged in successfully.')
-      navigate((-1), {replace: true})
+      navigate(('..'), {replace: true})
       setIsLogging(false)
     }).catch(err => {
       errorPopup(err.response.data)
@@ -55,7 +59,7 @@ const Login = ({setToken}) => {
             type="submit" 
             value={isLogging ? 'Logging in...' : 'Submit'}
             disabled={isLogging}
-            style={isLogging ? {pointerEvents: 'none'} : null}>
+            style={isLogging ? {pointerEvents: 'none'} : undefined}>
           </input>
         </div>
      </form>

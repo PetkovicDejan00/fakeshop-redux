@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { useCategories } from '../../hooks/useCategories'
@@ -39,7 +39,7 @@ const FilterButtons = () => {
         }
         {filtersShown &&
         <div className="filter-btns" data-aos="flip-up">
-            {categories?.data.map((category) => (
+            {categories?.data.map((category: string | undefined) => (
             <NavLink
                 key={category}
                 to={`/category/${category}`}

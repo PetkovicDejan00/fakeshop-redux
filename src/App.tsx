@@ -21,7 +21,7 @@ import Layout from './components/Layouts/Layout'
 import ProductsLayout from './components/Layouts/ProductsLayout';
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem('authToken') || null)
+  const [token, setToken] = useState(localStorage.getItem('authToken'))
 
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false, retry: 0 }}
