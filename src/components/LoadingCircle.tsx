@@ -4,7 +4,7 @@ const LoadingCircle = () => {
       <div></div>
       <div></div>
     </div>
-  )
-}
+  );
+};
 
-export default LoadingCircle
+export default LoadingCircle;

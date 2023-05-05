@@ -4,7 +4,7 @@
   padding: 0;
   margin: 0;
 
-  --primary-color: rgb(55,65,81);
+  --primary-color: rgb(55, 65, 81);
   --secondary-color: rgb(30, 183, 170);
 }
 a {
@@ -31,7 +31,6 @@ a {
   padding-block: 40px 20px;
 }
 
-
 /* HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER HEADER */
 
 .header {
@@ -55,7 +54,7 @@ a {
   width: 120px;
   display: flex;
   align-items: center;
-} 
+}
 .nav-logo img {
   width: 100%;
 }
@@ -133,7 +132,6 @@ a {
   background: #fff;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-
 }
 .cart-element-image {
   width: 300px;
@@ -183,7 +181,7 @@ a {
 }
 .cart-checkout-btn,
 .check-products-btn {
-  background:#777;
+  background: #777;
 }
 .cart-checkout-btn:hover,
 .check-products-btn:hover {
@@ -209,7 +207,7 @@ a {
   margin: 0 auto;
 }
 .cart-el-category {
-  color:gray;
+  color: gray;
 }
 .cart-el-title {
   margin-block: 1rem;
@@ -294,7 +292,9 @@ a {
 }
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 20px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 20px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .card-img {
@@ -402,13 +402,13 @@ a {
   align-items: center;
   display: flex;
   color: #fff;
-  padding:0.35rem 2rem;
+  padding: 0.35rem 2rem;
   font-size: 20px;
   pointer-events: none;
 }
 
 .sp-category {
-  color:  var(--primary-color);
+  color: var(--primary-color);
   font-weight: 600;
   padding: 1rem;
   margin-top: 1rem;
@@ -438,7 +438,7 @@ a {
 .qty-input .select-qty {
   font-size: 18px;
   width: 100px;
-  background:  var(--secondary-color);
+  background: var(--secondary-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -483,41 +483,41 @@ a {
   animation: circle 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 .circle div:nth-child(2) {
-      animation-delay: -0.5s;
+  animation-delay: -0.5s;
 }
-  
-  @keyframes circle {
+
+@keyframes circle {
   0% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 0;
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
   }
   4.9% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 0;
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
   }
   5% {
-      top: 36px;
-      left: 36px;
-      width: 0;
-      height: 0;
-      opacity: 1;
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
   }
   100% {
-      top: 0px;
-      left: 0px;
-      width: 72px;
-      height: 72px;
-      opacity: 0;
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
   }
 }
 
-/* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */  /* LOGIN */
+/* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */ /* LOGIN */
 
 .login-page {
   position: absolute;
@@ -531,7 +531,7 @@ a {
 .login-page h1 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #FFF;
+  color: #fff;
 }
 
 .login-page form {
@@ -562,7 +562,6 @@ a {
   width: 200px;
 }
 
-
 .button-container input:hover {
   box-shadow: inset 0 -32px 0 0 var(--secondary-color);
   color: #fff;
@@ -578,14 +577,11 @@ a {
   outline-color: var(--primary-color);
   text-align: center;
   color: var(--primary-color);
-
 }
-
-
 
 /* MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES MEDIA QUERIES  */
 
-@media(max-width: 1024px) {
+@media (max-width: 1024px) {
   .product-listing {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -613,7 +609,7 @@ a {
   }
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   .product-listing {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -652,7 +648,7 @@ a {
   }
 }
 
-@media(max-width: 575px) {
+@media (max-width: 575px) {
   .filter-btns {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -723,7 +719,7 @@ a {
   }
 }
 
-@media(max-width: 365px) {
+@media (max-width: 365px) {
   .filter-btns {
     grid-template-columns: 1fr;
   }
